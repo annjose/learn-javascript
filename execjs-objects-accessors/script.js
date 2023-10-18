@@ -29,7 +29,7 @@ const user = {
 const userName1 = user.userName;
 name1 = 'Betty';
 const userName2 = user.userName;
-console.log([userName1, userName2]);  ['Amir', 'Betty']
+console.log([userName1, userName2]);['Amir', 'Betty']
 
 // there are setters similar to getters
 const user4 = {
@@ -47,3 +47,18 @@ const user5 = {
 }
 user5.userName = 'Betty';
 console.log(user5.names);['Amir', 'Betty']
+
+// Code problem: Write a function that takes a user and returns a login count object for this user, mapping their name to their loginCount.
+const users = [
+    { name: 'Amir', loginCount: 5 },
+    { name: 'Betty', loginCount: 16 }
+];
+
+console.log(users[0]);   // prints {name: 'Amir', loginCount: 5}
+console.log(users[1]);   // prints {name: 'Betty', loginCount: 16}
+
+function loginCount(user) {
+    return { [user.name]: user.loginCount };
+}
+console.log(loginCount(users[0]));  // prints { Amir: 5 }
+console.log(loginCount(users[1]));  // prints {Betty: 16}
