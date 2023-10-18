@@ -62,3 +62,14 @@ function loginCount(user) {
 }
 console.log(loginCount(users[0]));  // prints { Amir: 5 }
 console.log(loginCount(users[1]));  // prints {Betty: 16}
+
+// shorthand properties
+const name2 = 'Amir';
+const age = 37;
+const user7 = {
+    name: name2, age: age
+}
+console.log('long-form syntax: ', [user7, name2, user7.age]);
+
+const user8 = {name2, age};
+console.log('shortcut syntax: ', [user7, name2, user7.age]);
