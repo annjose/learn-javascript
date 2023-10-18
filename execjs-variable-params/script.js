@@ -28,3 +28,11 @@ function f2(x, y) {    // this is a regular function - does not take rest parame
 const arr = [1, 2];
 const result = f2(...arr);  // you can pass arr as rest parameter even though f() does not take rest params
 console.log('result = ', result);  // shows 3
+
+// Code problem during revision
+// Write a function that shows us two numbers being added.
+function longSum(x, y) {
+    return `${x} + ${y} = ${x + y}`;
+}
+console.log(longSum(100, 200)); 
+console.log([longSum(1, 2), longSum(10, 20)]);
