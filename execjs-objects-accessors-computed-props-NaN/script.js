@@ -71,5 +71,17 @@ const user7 = {
 }
 console.log('long-form syntax: ', [user7, name2, user7.age]);
 
-const user8 = {name2, age};
+const user8 = { name2, age };
 console.log('shortcut syntax: ', [user7, name2, user7.age]);
+
+console.log('undefined - 1 = ', undefined - 1);  // prints Nan
+console.log('[1, 2, 3].lenght - 1 = ', [1, 2, 3].lenght - 1);   // prints Nan
+console.log('Nan === NaN is', NaN == NaN);                      // prints false
+console.log('Nan === NaN is', NaN === NaN);                     // prints false
+console.log('isNaN(Infinity)', isNaN(Infinity));    // prints false
+
+console.log('isNaN(undefined - 1)', isNaN(undefined - 1));  // prints true
+console.log('isNaN(undefined)', isNaN(undefined));          // prints true, but it is a bug in JavaScript. Check Obsidian notes.
+
+console.log('Number.isNaN(undefined - 1)', Number.isNaN(undefined - 1));  // prints true
+console.log('Number.isNaN(undefined)', Number.isNaN(undefined));          // prints false. CORRECT!
