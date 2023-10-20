@@ -78,7 +78,7 @@ console.log('filter result = ', r1, 'find result = ', r2); // filter result = [8
 
 // map() method
 const ages = [10, 22, 55, 12];
-const doubled = ages.map(function(age) {
+const doubled = ages.map(function (age) {
     return age * 2;
 })
 console.log('ages doubled = ', doubled);
@@ -87,3 +87,16 @@ console.log([10, 20, 7, 30].includes(20), [10, 20, 7, 30].includes(3333)); // tr
 
 console.log(['Alice', 'Bob', 'Chloe'].toString());  // Alice,Bob,Chloe
 console.log(['Alice', 'Bob', 'Chloe'].join(' | ')); // Alice | Bob | Chloe
+
+function sum(...nums) {
+    let sum = 0;
+    if (nums === undefined) {
+        return sum;
+    }
+    for (const num of nums) {
+        sum += num;
+    }
+    return sum;
+}
+const sums = [sum(), sum(100), sum(2000, 1), sum(-500, -300)];
+console.log(sums);
