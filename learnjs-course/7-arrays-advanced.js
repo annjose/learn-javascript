@@ -54,3 +54,28 @@ console.log(`product=${product}`); // 3000
 // you can rewrite this using implicit return as well (remove the return keyword and curly braces)
 const product_ = numbers.reduce((accumulator, current) => accumulator * current, 1);
 console.log(`product_=${product_}`); // 3000
+
+
+// Array destructuring
+const dimensions = [10, 20];
+
+const length_ = dimensions[0];
+const breadth_ = dimensions[1];
+console.log(dimensions, length_, breadth_);   // [10,20]  10  20
+
+const [length, breadth] = dimensions;
+console.log(dimensions, length, breadth);     // [10,20]  10  20
+
+// Destructure an array user with two items first name and last name.
+const getFullName = user => {
+    const [firstName, lastName] = user;
+    return `${firstName} ${lastName}`;
+}
+console.log(getFullName(["Sam", "Blue"])); // "Sam Blue"
+console.log(getFullName(["Alex", "Green"])); // "Alex Green"
+
+// spread syntax (...)
+const fruits = ['Apple', 'Orange'];
+const veggies = ['Cabbage', 'Broccoli'];
+const wholeFoods = [...fruits, ...veggies];
+console.log(wholeFoods);
