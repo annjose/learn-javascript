@@ -27,3 +27,30 @@ console.log(doubles);              // [11, 55, 66, 77] Original array retains th
 doubles = [11, 22, 33, 44, 55, 66, 77]; // reset the array
 console.log(doubles.splice(2)); // [33, 44, 55, 66, 77] Removed all elements starting at index 2(i.e third element onwards)
 console.log(doubles);           // [11, 22] Original array retains the left and right of the splice removed. 
+
+
+// Array reduce
+const numbers = [10, 15, 20];
+
+// find the sum of numbers the old-fashioned way - using forEach
+let sumOld = 0;
+numbers.forEach(num => {
+    sumOld += num;
+});
+console.log(`sumOld= ${sumOld}`);   // 45
+
+// find the sum using reduce
+const sumNew = numbers.reduce((accumulator, current) => {
+    return accumulator + current;
+}, 0);
+console.log(`sumNew= ${sumNew}`);   // 45
+
+// Multiplication using array reduce. Answer: 10 * 15 * 20 = 3000
+const product = numbers.reduce((accumulator, current) => {
+    return accumulator * current;
+}, 1);
+console.log(`product=${product}`); // 3000
+
+// you can rewrite this using implicit return as well (remove the return keyword and curly braces)
+const product_ = numbers.reduce((accumulator, current) => accumulator * current, 1);
+console.log(`product_=${product_}`); // 3000
