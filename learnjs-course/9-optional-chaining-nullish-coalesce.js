@@ -50,3 +50,43 @@ let settings2 = { theme: 'light' };
 console.log('settings2 before assignment: ', settings2);    // {theme: 'light'}
 settings2.theme && (settings2.theme = 'dark');    // checks if settings.theme exists and if so, sets it to 'dark'
 console.log('settings2 after assignment: ', settings2);     // {theme: 'dark'}
+
+
+// Nullish coalescing
+console.log('\n------Nullish coalescing-----');
+const getName = name => {
+    return name ?? 'N/A';
+}
+console.log(getName('Ann'), getName(null), getName(undefined)); // Ann N/A N/A
+
+const getWelcomeMessage = user => {
+    return `Welcome ${user.fullName ?? `user`}`
+}
+console.log(getWelcomeMessage({ fullName: "Sam Green" })); // "Welcome Sam Green"
+console.log(getWelcomeMessage({})); // "Welcome user"
+
+// combine nullish coalescing with optional chaining
+const response = {
+    data: {
+        user: {
+            name: {
+                lastName: 'Doe',
+                // no firstName
+            }
+        }
+    }
+}
+console.log(data.user?.name?.firstName);            // undefined
+console.log(data.user?.name?.firstName ?? "N/A");   // "N/A"
+
+console.log(`------null vs. undefined-----`);
+const p = {
+    name: 'John',
+    age: 34,
+    address: null
+}
+console.log(p.birthday, p.address); // undefined null
+
+const student = {};
+console.log(2 * student.age ?? 0);     // NaN
+console.log(2 * (student.age ?? 0));   // 0
