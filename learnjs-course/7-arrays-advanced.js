@@ -79,3 +79,55 @@ const fruits = ['Apple', 'Orange'];
 const veggies = ['Cabbage', 'Broccoli'];
 const wholeFoods = [...fruits, ...veggies];
 console.log(wholeFoods);
+
+// Coding challenge - calculate average age of users
+const getAverageAge = users => {
+    const sum = users.reduce((accumulator, currentUser) => {
+        return accumulator + currentUser.age
+    }, 0);
+    return sum / users.length;
+};
+
+// Sample usage - do not modify
+const users = [
+    { joined_on: "2018-12-13", age: 14 },
+    { joined_on: "2018-12-15", age: 18 }
+];
+console.log('average age = ' + getAverageAge(users)); // 16
+
+// Coding challenge - calculate total sales
+const getTotalSales = users => {
+    return users.reduce(
+        (accumulator, currentUser) => {
+            let value = currentUser.subscription?.info?.value ?? 0;
+            return accumulator + value;
+        },
+        0
+    );
+}
+
+// Sample usage - do not modify
+const users2 = [
+    { id: 1, name: "Alex" },
+    { id: 2, name: "Sam", subscription: { info: { value: 59 } } },
+    { id: 3, name: "Charlie", subscription: { info: { value: 31 } } }
+];
+console.log('total sales = ' + getTotalSales(users2)); // 90
+
+// Reduce an array of objects
+const grades = [{ grade: 10 }, { grade: 15 }, { grade: 5 }];
+const sumGrades = grades.reduce((accumulator, currentGrade) => accumulator + currentGrade.grade, 0);
+console.log('sumGrades = ' + sumGrades);    // sumGrades = 30
+
+// calculate social impact of tweets as the sum of all the likes and retweets for all the tweets.
+const tweets = [
+    { id: 10512, stats: { likes: 41, retweets: 54 } },
+    { id: 41241, stats: { likes: 14, retweets: 20 } }
+];
+const socialImpact = (tweets) => {
+    return tweets.reduce(
+        (accumulator, currentTweet) => accumulator + currentTweet.stats.likes + currentTweet.stats.retweets,
+        0
+    )
+}
+console.log('socialImpact = ' + socialImpact(tweets));    // socialImpact = 129
