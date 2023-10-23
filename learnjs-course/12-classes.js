@@ -159,3 +159,36 @@ console.log(Object.getPrototypeOf("hello"));    // String ('')
 console.log(Object.getPrototypeOf(Object.getPrototypeOf("hello")));
 // {constructor: ƒ, __defineGetter__: ƒ, __defineSetter__: ƒ, hasOwnProperty: ƒ, __lookupGetter__: ƒ, …}
 console.log(Object.getPrototypeOf(Object.getPrototypeOf(Object.getPrototypeOf("hello"))));  // null
+
+// public class fields
+class Citizen {
+    votingeAge = 18;
+    constructor() {
+        // no need to initialize variables here.
+    }
+}
+
+// private class fields
+class Constituent {
+    #votingAge = 18;
+    constructor() {
+        console.log(`Constituent constructor(): age = ${this.#votingAge}`); // Constituent constructor(): age = 18
+    }
+    get age() {
+        return this.#votingAge;
+    }
+}
+const constituent = new Constituent();
+console.log(constituent.age);   // 18
+
+// private instance methods
+class Student {
+    constructor() {
+        this.#logInfo('in constructor');
+    }
+    #logInfo(message) {
+        console.log(`logInfo(): ${message}`);   // logInfo(): in constructor
+    }
+}
+const s = new Student();
+// s.#logInfo()    // ERROR: Private field '#logInfo' must be declared in an enclosing class
