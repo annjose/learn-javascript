@@ -97,3 +97,65 @@ class Grader {
 }
 const grader = new Grader();
 grader.setGrade(70).markAsComplete();
+
+console.log(`\n`);
+
+// Class inheritance
+class Employee {
+    constructor(name) {
+        this._name = name;
+    }
+    get name() {
+        return this._name;
+    }
+    getWorkspace() {
+        return "dedicated desk";
+    }
+}
+class Manager extends Employee {
+    getDirectReports() {
+        return 10;
+    }
+    getWorkspace() {
+        return "office room"
+    }
+}
+
+const emp = new Employee("Emp Doe");
+console.log(`Employee: Name: ${emp.name}, Workspace: ${emp.getWorkspace()}`);   // Employee: Name: Emp Doe, Workspace: dedicated desk
+const mgr = new Manager("Mgr Smith")
+console.log(`Manager: Name: ${mgr.name}, Workspace: ${mgr.getWorkspace()}`);    // Manager: Name: Mgr Smith, Workspace: office room
+console.log(`Manager direct reports: ${mgr.getDirectReports()}`);       // Manager direct reports: 10
+
+class Parent {
+    constructor(name) {
+        this.name = name;
+    }
+    getName() {
+        return this.name;
+    }
+}
+class Child extends Parent {
+    constructor(name, suffix) {
+        super(name);
+        this.suffix = suffix
+    }
+    getName() {
+        return super.getName() + this.suffix;
+    }
+}
+const parent = new Parent("John")
+console.log(`parent.getName() => ${parent.getName()}`); // parent.getName() => John
+const child = new Child("Jim", "[child]");
+console.log(`child.getName() => ${child.getName()}`);   // child.getName() => Jim[child]
+
+console.log(typeof (Child));     // function
+
+
+// Prototypes
+console.log(Object.getPrototypeOf(1));          // Number (0)
+console.log(Object.getPrototypeOf(false));      // Boolean (false)
+console.log(Object.getPrototypeOf("hello"));    // String ('')
+console.log(Object.getPrototypeOf(Object.getPrototypeOf("hello")));
+// {constructor: ƒ, __defineGetter__: ƒ, __defineSetter__: ƒ, hasOwnProperty: ƒ, __lookupGetter__: ƒ, …}
+console.log(Object.getPrototypeOf(Object.getPrototypeOf(Object.getPrototypeOf("hello"))));  // null
