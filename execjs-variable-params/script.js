@@ -8,7 +8,7 @@ console.log(f('a', 'b'));  // prints ['a', 'b']
 console.log(f('a', 'b', 'c'));  // prints ['a', 'b', 'c']
 
 // Code problem: Write a function that sums numbers. It should take the numbers as rest parameters. If no arguments are given, it should return 0.
-function sum(...nums) {
+function sum(...nums) {     // IMPORTANT: read the params as variable params - to convert the series of args into an array
     let sum = 0;
     for (const num of nums) {
         sum += num;
