@@ -1,86 +1,83 @@
 'use strict';
 
+/*
 const wait = milliseconds => {
     return new Promise(resolve => {
         setTimeout(() => {
-            resolve();
+            resolve(333);
         }, milliseconds);
     });
 };
-// wait(1000).then(() => {
-//     console.log("Done!");
-// });
 
-// FROM - with async callbacks
-const setTemperature = (temperature, successCallback, errorCallback) => {
+const promise = wait(500);
+console.log(promise);       // Promise {[[PromiseState]]: 'pending', [[PromiseResult]]: undefined, ...}
+promise.then((value) => {
+    console.log(`waited for 500 msecs. Got value ${value}`);
+    console.log(promise);   // Promise {[[PromiseState]]: 'fulfilled', [[PromiseResult]]: 333, ...}
+});
+console.log(promise);       // Promise state pending (because this line is executed before the 500 msecs is elapsed)
 
-    // if input is not valid, return error through the errorCallback
-    if (temperature > 100) {
-        const error = `Requested temperature ${temperature} is above the threshold of 100`;
-        if (errorCallback) {
-            errorCallback(error);
-        }
-        return;
+*/
+
+
+const fakeAPI = (request, successCallback, errorCallback) => {
+    console.log(`fakeAPI(): request id: ${request.id}. calling setTimeout()`);
+    if (request.id === "") {
+        errorCallback("Error: request id is empty.")
     }
-    setTimeout(
-        () => {
-            console.log(`Done setting temperature to ${temperature}`);
-            const value = 100;
-            if (successCallback) {
-                successCallback(value);
+    setTimeout(() => {
+        const response = { httpCode: 200 };
+        console.log(`fakeAPI(): setTimeout done. Returning async call with response httpCode = ${response.httpCode}`);
+        if (successCallback) {
+            successCallback(response);
+        }
+    }, 2000);
+};
+
+const fakeAPI_Promise = (request) => {
+    return new Promise((resolve, reject) => {
+        console.log(`fakeAPI_Promise(): starting async operation that will take 1000 msecs`);
+        setTimeout(() => {
+            if (!request || !request.id || typeof request.id !== "string") {
+                const errorMessage = `ERROR. Server returned error. Reason: Request is invalid. request = ${JSON.stringify(request)}`;
+                const response = { httpCode: 400, data: { error: [errorMessage] } };
+                console.log(`fakeAPI_Promise(): setTimeout done. But request.id is empty, hence returning async call with error httpCode = ${response.httpCode}`);
+                reject(response)
+            } else {
+                const response = { httpCode: 200, data: { name: "Ann" } };
+                console.log(`fakeAPI_Promise(): setTimeout done. Returning async call with response httpCode = ${response.httpCode}`);
+                resolve(response);
             }
-        },
-        1_000
-    );
-}
-
-const callSetTemperature = (temperature) => {
-    console.log(`calling setTemperature with temperature=${temperature}`);
-    setTemperature(
-        temperature,
-        (value) => { console.log(`SUCCESS: ${value}`); },
-        (error) => { console.log(`ERROR: ${error}`); }
-    );
-}
-
-// callSetTemperature(81);
-// callSetTemperature(121);
-
-
-// TO - with promises
-
-const setTemperatureWithPromise = (temperature, successCallback, errorCallback) => {
-
-    // if input is not valid, return error through the errorCallback
-    if (temperature > 100) {
-        const error = `Requested temperature ${temperature} is above the threshold of 100`;
-        if (errorCallback) {
-            errorCallback(error);
-        }
-        return;
-    }
-    return new Promise(resolve => {
-        setTimeout(
-            () => {
-                console.log(`Done setting temperature to ${temperature}`);
-                const value = 100;
-                if (resolve) {
-                    resolve(value);
-                }
-            },
-            1_000
-        );
+        }, 1000);
     });
-}
-const callSetTemperature_WithPromises = (temperature) => {
-    console.log(`calling setTemperature with Promises with temperature=${temperature}`);
-    setTemperatureWithPromise(temperature)
-        .then(value => {
-            console.log(`SUCCESS: ${value}`);
-        })
-        .catch(error => {
-            console.log(`ERROR: ${error}`);
-        });
-}
-callSetTemperature_WithPromises(81);
-// callSetTemperature_WithPromises(121);
+};
+
+const request = { id: "123" };  // will resolve the promise
+// const request = { id: "" };  // will reject the promise
+// const request = null;        // will reject the promise
+
+console.log(`calling fakeAPI_Promise with request with request ${JSON.stringify(request)}`);
+fakeAPI_Promise(request)
+    .then((data) => {
+        console.log(`promise.then():: Promise RESOLVED. Returned data: ${JSON.stringify(data)}`);
+        // promise.then():: Promise RESOLVED. Returned data: {"httpCode":200,"data":{"name":"Ann"}}
+    })
+    .catch((error) => {
+        console.log(`promise.catch():: Promise REJECTED Returned error: ${JSON.stringify(error)}`);
+        // promise.catch():: Promise REJECTED Returned error: {"httpCode":400,"data":{"error":["ERROR. Server ..."]}}
+    })
+    .finally( () => console.log('promise.finally():: called after both resolve and reject.'));
+
+// Handle both resolve and reject inside `then` callback.
+// Not a good option because you still need to add an empty `catch` block. AND you introduced the if-else inside `then` block.
+// fakeAPI_Promise(request)
+//     .then((data, error) => {
+//         if (data) {
+//             console.log(`promise.then():: Promise RESOLVED. Returned data: ${JSON.stringify(data)}`);
+//             // promise.then():: Promise RESOLVED. Returned data: {"httpCode":200,"data":{"name":"Ann"}}
+//         } else if (error) {
+//             console.error(`promise.catch():: Promise REJECTED Returned error: ${JSON.stringify(error)}`);
+//             // promise.catch():: Promise REJECTED Returned error: {"httpCode":400,"data":{"error":["ERROR. Server ..."]}}
+//         }
+//     })
+//     .catch(() => { });
