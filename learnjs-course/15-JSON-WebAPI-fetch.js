@@ -107,6 +107,7 @@ function showTweetDetails(tweet) {
 getTweetDetails();  // (after delay): Author name: Jad Joubran
 */
 
+/*
 // Handle fetch errors
 const url = "https://jsdemo-3f387-default-rtdb.europe-west1.firebasedatabase.app/notifications/new.json";
 fetch(url)
@@ -126,3 +127,39 @@ fetch(url)
         // fetch returned error (when Wifi is disabled on the computer)
         console.error(error); // TypeError: fetch failed. {cause: Error: getaddrinfo ENOTFOUND}
     })
+*/
+
+// Other HTTP methods, pass body and headers
+
+/*
+const url = "https://api.learnjavascript.online/demo/grades.json";
+const grade = 15;
+fetch(url, {
+    method: "post",
+    body: JSON.stringify({ grade: grade })
+})
+.then(response => response.json())
+.then(data => {
+    console.log(`API returned data=${JSON.stringify(data)}`) // data={"success":true,"grade":{"id":76221,"grade":15,...}}
+});
+*/
+
+// Another API to update the user name
+// Base URL: https://api.learnjavascript.online/demo/
+// Endpoint: user.json
+// Method: PUT
+// Body: { firstName: "Sam", lastName: "Green" }
+const url = "https://api.learnjavascript.online/demo/user.json";
+const [firstName, lastName] = ["Sam", "Green"];
+fetch(url, {
+    method: "PUT",
+    body: JSON.stringify({ firstName: firstName, lastName: lastName}),
+    headers: { "Content-Type": "application/json" }
+})
+.then(response => response.json())
+.then(data => {
+    console.log(JSON.stringify(data));  // {"success":true,"user":{"id":76658,"firstName":"Sam","lastName":"Green", ...}
+})
+.catch(error => {
+    console.error(error);
+});
