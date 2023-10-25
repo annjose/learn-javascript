@@ -22,3 +22,30 @@ const willItRain = weatherApiResponse => {
 // Sample usage - do not modify
 console.log(willItRain('{"now":{"temperature":18,"humidity":"30%","uvIndex":0,"rainExpected":true}}')); // true
 console.log(willItRain('{"now":{"temperature":25,"humidity":"90%","uvIndex":4,"rainExpected":false}}')); // false
+
+// fetch Web API
+const url = "https://jsdemo-3f387-default-rtdb.europe-west1.firebasedatabase.app/notifications/new.json";
+fetch(url)
+    .then(response => {
+        console.log(response);  // Response {Symbol(realm): null, Symbol(state): Proxy, Symbol(headers): Headers}
+
+        const jsonPromise = response.json();
+        console.log(jsonPromise);    // Promise {[[PromiseState]]: 'pending', [[PromiseResult]]: undefined...
+
+        return jsonPromise;
+    })
+    .then(data => {
+        console.log("long form");
+        console.log(`typeof(data) = ${typeof (data)}`);  // typeof(data) = object
+        console.log(data);      // {count: 3, message: 'You've got 3 new notifications'}
+    });
+
+console.log("between fetch calls");  // will be logged at the beginning - before the fetch calls return
+
+// More concise (and common) syntax
+fetch(url)
+    .then(response => response.json())
+    .then(data => {
+        console.log("concise form");
+        console.log(data); // {count: 3, message: 'You've got 3 new notifications'}
+    }); 
