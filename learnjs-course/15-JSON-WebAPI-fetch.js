@@ -84,6 +84,7 @@ fetch(url)
     });
 */
 
+/*
 // API 4 - Tweet details (Coding challenge)
 const getTweetDetails = () => {
     const url = "https://jsdemo-3f387-default-rtdb.europe-west1.firebasedatabase.app/tweet/1080777336298049537.json";
@@ -104,3 +105,24 @@ function showTweetDetails(tweet) {
 }
 
 getTweetDetails();  // (after delay): Author name: Jad Joubran
+*/
+
+// Handle fetch errors
+const url = "https://jsdemo-3f387-default-rtdb.europe-west1.firebasedatabase.app/notifications/new.json";
+fetch(url)
+    .then(response => {
+        console.log(`Response object. ok=${response.ok}, status=${response.status}, statusText=${response.statusText}`)
+        if (response.ok) {
+            console.log("Server returned success response");
+            return response.json();
+        } else {
+            console.log("Server returned error response");
+        }
+    })
+    .then(data => {
+        console.log(data); // {count: 3, message: 'You've got 3 new notifications'}
+    })
+    .catch(error => {
+        // fetch returned error (when Wifi is disabled on the computer)
+        console.error(error); // TypeError: fetch failed. {cause: Error: getaddrinfo ENOTFOUND}
+    })
