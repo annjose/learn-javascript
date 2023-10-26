@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Page</title>
+    <meta charset="UTF-8" />
+    <script>
+        function showQueryResult_SingleElement(selector) {
+            let code = `document.querySelector(${selector})`;
+            let htmlElement = document.querySelector(selector);
+            console.log(`Code: ${code}; Type = ${typeof (htmlElement)}. Result: (see below):`);
+            console.log(htmlElement);
+        }
+        function runQuerySelectors() {
+            console.log("query selector examples...");
+
+            // TODO: get the element with id navbar
+            showQueryResult_SingleElement("#navbar");
+
+            // TODO: get the element with id main
+            showQueryResult_SingleElement("#main");
+
+            // TODO: get the about link that's in the footer
+            // Note - there are two About links; make sure that you choose the correct one in the footer.
+            showQueryResult_SingleElement("#footer-wrapper .about");
+
+            // TODO: get the first paragraph element
+            showQueryResult_SingleElement("p");
+
+            console.log(`show all a href links..`);
+            showQueryResult_MultipleElements("a");
+
+            // TODO: return all the div elements
+            showQueryResult_MultipleElements("div");
+
+            // TODO: return all the links that are in the footer-wrapper
+            showQueryResult_MultipleElements("#footer-wrapper a");
+
+            // TODO: return all the links that point to the About Us page
+            showQueryResult_MultipleElements("a.about")
+
+            // show details of all About elements (NodeList object)
+            const elements = document.querySelectorAll("a.about");
+            console.log(`# of elements: ${elements.length}. Element[0]: ${elements[0]}. All elements (see below): `);
+            elements.forEach(element => {
+                console.log(element);
+                console.log(`\t Details: typeof element = ${typeof element}. textContent = ${element.textContent}`);
+            });
+
+            // convert NodeList to an array
+            const elementArray = [...elements];
+            console.log(elementArray);      // [a.about, a.about]
+            console.log(elementArray.map(item => item.textContent)); // ['About us', 'About us']
+        }
+
+        function showQueryResult_MultipleElements(selector) {
+            let code = `document.querySelectorAll(${selector})`;
+            const elements = document.querySelectorAll(selector);
+            console.log(`Code: ${code}. Type = ${typeof (elements)}. Result: (see below):`);
+            console.log(elements);
+        }
+
+    </script>
+</head>
+
+<body onload="runQuerySelectors();">
+    <nav id="navbar">
+        <a href="" class="nav-brand">App</a>
+        <ul>
+            <li class="nav-item"><a href="about.html" class="about">About us</a></li>
+            <li><a href="" class="nav-item btn btn-default">Register</a></li>
+        </ul>
+    </nav>
+
+    <div id="main" class="container">
+        <h1>Welcome to our app</h1>
+        <p>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Natus,
+            voluptatem.
+        </p>
+    </div>
+
+    <footer id="footer-wrapper">
+        <a href="about.html" class="about" target="_blank">About us</a>
+        <a href="contact.html" class="contact" target="_blank">Contact us</a>
+    </footer>
+</body>
+
+</html>
