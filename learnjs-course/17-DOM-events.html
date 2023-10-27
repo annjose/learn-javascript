@@ -18,6 +18,8 @@
         <li class="menu-item"><button class="menu-item-button">Oranges</button></li>
         <li class="menu-item"><button class="menu-item-button">Grapes</button></li>
     </ul>
+    <button id="temp-listener-button">Temporary Click</button>
+    <div id="temp-content">(Placeholder content)</div>
 </body>
 
 <script>
@@ -49,6 +51,20 @@
                 event.currentTarget.classList.toggle("active");
             });
         });
+
+    let count = 0;
+    const tempButton = document.querySelector("#temp-listener-button");
+    const callback = (event) => {
+        console.log(event.currentTarget.textContent);
+        document.querySelector("#temp-content").textContent = `Temp button click count (will stop after 5 secs): ${++count}`;
+    }
+
+    tempButton.addEventListener("click", callback);
+    setTimeout(() => {
+        // remove the event listener from above after 5 seconds
+        console.log('removing event listener');
+        tempButton.removeEventListener("click", callback);
+    }, 5_000);
 
 </script>
 
