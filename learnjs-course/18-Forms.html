@@ -1,0 +1,24 @@
+<html>
+
+<head></head>
+
+<body>
+    <h1>Hello Forms!</h1>
+    <form id="hello-form">
+        <label for="name">Name: </label>
+        <input type="text" id="name" placeholder="Enter your name">
+        <input type="submit" value="Say Hello">
+    </form>
+    <div id="content">(placeholder content)</div>
+</body>
+
+<script>
+    document.querySelector("#hello-form")
+        .addEventListener("submit", (event) => {
+            event.preventDefault();     // without this line, the page will refresh soon after showing the content
+            const name = document.querySelector("#name").value;
+            document.querySelector("#content").textContent = `Hello ${name}!`;
+        });
+</script>
+
+</html>
