@@ -2,11 +2,22 @@
 
 <head>
     <title>DOM Events sample</title>
+    <style>
+        .active {
+            background-color: goldenrod !important;
+        }
+    </style>
 </head>
 
 <body>
     <h2>Hello DOM Events!</h2>
     <button id="button">Click me</button>
+    <div>List of fruits (you can click any of them)</div>
+    <ul id="menu-list">
+        <li class="menu-item"><button class="menu-item-button">Apples</button></li>
+        <li class="menu-item"><button class="menu-item-button">Oranges</button></li>
+        <li class="menu-item"><button class="menu-item-button">Grapes</button></li>
+    </ul>
 </body>
 
 <script>
@@ -20,6 +31,25 @@
         console.log(event);     // PointerEvent {isTrusted: true, pointerId: 1, width: 1, height: 1
         console.log(`event.currentTarget = ${event.currentTarget}`);    // [object HTMLButtonElement]
     });
+
+    // const handleButtonClick = (event) => {
+    //     console.log(event.currentTarget);
+    //     event.currentTarget.classList.toggle("active");
+    // }
+
+    // const menuButtons = document.querySelectorAll("#menu-list .menu-item-button");
+    // menuButtons.forEach(button => {
+    //     button.addEventListener("click", handleButtonClick);
+    // });
+
+    // More concise
+    document.querySelectorAll("#menu-list .menu-item-button")
+        .forEach(button => {
+            button.addEventListener("click", (event) => {
+                event.currentTarget.classList.toggle("active");
+            });
+        });
+
 </script>
 
 </html>
