@@ -39,5 +39,27 @@ const employee = {
         return "Jo" + "hn"
     }
 }
-const {name: empName} = employee;
+const { name: empName } = employee;
 console.log(`empName = ${empName}`);    // empName = "John"
+
+
+// Destructuring within functions
+const item = { name: "Table", price: 1000 };
+function itemSummary({ name, price }) {
+    return `${name} costs ${price}`;
+}
+// Alternately, you can use the usual method of using item object and accessing the properties using item.name, item.price
+function itemSummary_same(item) {
+    return `${item.name} costs ${item.price}`;
+}
+
+console.log("destructure syntax: " + itemSummary(item)); // Table costs 1000
+console.log("regular syntax: " + itemSummary_same(item)); // Table costs 1000
+
+// Destrcuture inside for loops
+const users = [{ name: "John" }, { name: "Abby" }];
+const names = [];
+for (const { name } of users) {
+    names.push(name);
+}
+console.log(names); // ['John', 'Abby']
