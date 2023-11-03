@@ -58,3 +58,16 @@ function doubleNumbers(strings, ...values) {
 }
 const result = doubleNumbers`the numbers ${1} and ${2}`;
 console.log(result);    // the numbers 2 and 4
+
+// Nested destructuring
+const dataPoints = [
+    [11, 15],
+    [22, 24]
+];
+const [[x1, y1], [x2, y2]] = dataPoints;
+console.log(`x1=${x1}, y1=${y1}, x2=${x2}, y2=${y2}`);
+
+const [[x3,]] = dataPoints;
+const [[, x4]] = dataPoints;
+const [, [, x5]] = dataPoints;
+console.log(`x3=${x3}, x4=${x4}, x5=${x5}`);    // x3=11,  x4=15, x5=24

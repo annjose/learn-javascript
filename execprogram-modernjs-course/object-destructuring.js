@@ -1,8 +1,8 @@
 'use strict';
 
-const person = { name: 'John', email: "john@gmail.com", age: 36 };
-const { name, age } = person;
-console.log(name, age);     // "John", 36
+const person = { name1: 'John', email: "john@gmail.com", age: 36 };
+const { name1, age } = person;
+console.log(name1, age);     // "John", 36
 
 const { name3 } = person;
 console.log(name3);     // undefined (because person does not have property name3)
@@ -63,3 +63,37 @@ for (const { name } of users) {
     names.push(name);
 }
 console.log(names); // ['John', 'Abby']
+
+// Nested destructuring
+const patient = {
+    name: "Amir",
+    address:
+    {
+        city: "Paris"
+    }
+};
+const { address: { city } } = patient;
+console.log(`destructure, city=${city}`);   // city=Paris
+// NOTE: there is no 'address' variable, it is specified here only to reach 'city'
+// console.log(`address=${address}`);  // ERROR: ReferenceError: address is not defined
+
+// If you want to get address as a variable, then you should do:
+const { address } = patient;
+console.log(address);  // {city: 'Paris'}
+
+// If you want address and city, you should use the syntax correctly
+const patient2 = {
+    name2: "Amir",
+    address2:
+    {
+        city2: "Paris"
+    }
+};
+const { address2, address2: { city2 } } = patient2;
+console.log(address2, city2);     // {city: 'Paris'} Paris
+
+// Destructure multiple variables from multiple objects together
+const worker = { company: "Google" };
+const vehicle = { make: "Ford" };
+const [{ company }, { make }] = [worker, vehicle];
+console.log([make, company]);   // ['Ford', 'Google']
