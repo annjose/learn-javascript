@@ -27,39 +27,7 @@ console.log(s1, s2, srest);  // 'w', 'x', ['y', 'z']
 const [...chars] = 'abc';
 console.log(chars);     // ['a', 'b', 'c']
 
-
-// Shorthand methods
-const user = {
-    name() { return 'Ann'; }
-}
-console.log(user.name());   // Ann
-
-const rectangle3D = {
-    width: 3,
-    depth: 4,
-    height: 5,
-    baseArea() { return this.width * this.depth; },
-    volume() {
-        return this.baseArea() * this.height;
-    }
-};
-console.log(rectangle3D.volume());  // 60
-
-// Tagged template literals
-function doubleNumbers(strings, ...values) {
-    let result = '';
-    for (let i = 0; i < strings.length; i++) {
-        result += strings[i];
-        if (i < values.length) {
-            result += values[i] * 2;
-        }
-    }
-    return result;
-}
-const result = doubleNumbers`the numbers ${1} and ${2}`;
-console.log(result);    // the numbers 2 and 4
-
-// Nested destructuring
+// Nested array destructuring
 const dataPoints = [
     [11, 15],
     [22, 24]

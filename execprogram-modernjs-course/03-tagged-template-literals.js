@@ -1,10 +1,10 @@
 'use strict';
 
 // very simple Tagged template literal
-function randomFunc(strings, ...values){
+function randomFunc(strings, ...values) {
     return "someResult";
 }
-const result = randomFunc`xpz${2+2}`;
+const result = randomFunc`xpz${2 + 2}`;
 console.log(result);    // someResult
 
 function returnsItsArguments(strings, ...values) {
@@ -29,7 +29,7 @@ console.log(result2);    //  { strings: ["one",""], values: [2] }
 console.log(JSON.stringify(result2) == `{"strings":["one",""],"values":[2]}`);    // true
 
 // another Tagged literal with one literal string and one value - note that value is at the BEGINNING of the template
-const result3 = returnsItsArguments`${2}three`;  
+const result3 = returnsItsArguments`${2}three`;
 console.log(result3);    //  { strings: ["","three"], values: [2] }
 console.log(JSON.stringify(result3) == `{"strings":["","three"],"values":[2]}`);    // true
 
@@ -49,3 +49,17 @@ function doubleNumbers(strings, ...values) {
 }
 const result4 = doubleNumbers`the numbers ${1} and ${2}`;
 console.log(result4);    // "the numbers 2 and 4"
+
+// Double numbers using tagged template literals
+function doubleNumbers(strings, ...values) {
+    let result = '';
+    for (let i = 0; i < strings.length; i++) {
+        result += strings[i];
+        if (i < values.length) {
+            result += values[i] * 2;
+        }
+    }
+    return result;
+}
+const result_2 = doubleNumbers`the numbers ${1} and ${2}`;
+console.log(result_2);    // the numbers 2 and 4
