@@ -61,3 +61,35 @@ console.log([admin.name, admin.email, admin.isAdmin]);  // ['Amir', 'amir@exampl
 
 // JS does not support multiple inheritance
 // class Crow extends Animal, Bird { }  // SyntaxError: Unexpected token ','
+
+
+
+// Class scoping
+console.log("---------------------------------Class Scoping-------------------------------------------")
+
+function createGorilla() {
+    class Gorilla {
+        constructor(name) {
+            this.name = name;
+        }
+    }
+
+    return new Gorilla('King Kong')     // name of the gorilla is passed into the constructor
+}
+
+// console.log(new Gorilla('test'));   // Uncaught ReferenceError ReferenceError: Gorilla is not defined
+
+let gorilla = createGorilla();
+console.log(gorilla);   // Gorilla {name: 'King Kong'}
+
+function createGorillaWithName(paramName) {
+    class Gorilla {
+        constructor() {             // note: this constructor does NOT take any name argument
+            this.name = paramName;  // note: this constructor 'captures' the value of paramName from the function parameter
+        }
+    }
+
+    return new Gorilla();   // note: not passing argument into Gorilla constructor
+}
+gorilla = createGorillaWithName('Winston');
+console.log(gorilla);   // Gorilla {name: 'Winston'}
