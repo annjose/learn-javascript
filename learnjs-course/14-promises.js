@@ -44,7 +44,7 @@ const fakeAPI_Promise = (request) => {
                 console.log(`fakeAPI_Promise(): setTimeout done. But request.id is empty, hence returning async call with error httpCode = ${response.httpCode}`);
                 reject(response)
             } else {
-                const response = { httpCode: 200, data: { name: "Ann" } };
+                const response = { httpCode: 200, data: { name: "Amy" } };
                 console.log(`fakeAPI_Promise(): setTimeout done. Returning async call with response httpCode = ${response.httpCode}`);
                 resolve(response);
             }
@@ -60,7 +60,7 @@ console.log(`calling fakeAPI_Promise with request with request ${JSON.stringify(
 fakeAPI_Promise(request)
     .then((data) => {
         console.log(`promise.then():: Promise RESOLVED. Returned data: ${JSON.stringify(data)}`);
-        // promise.then():: Promise RESOLVED. Returned data: {"httpCode":200,"data":{"name":"Ann"}}
+        // promise.then():: Promise RESOLVED. Returned data: {"httpCode":200,"data":{"name":"Amy"}}
     })
     .catch((error) => {
         console.log(`promise.catch():: Promise REJECTED Returned error: ${JSON.stringify(error)}`);
@@ -74,7 +74,7 @@ fakeAPI_Promise(request)
 //     .then((data, error) => {
 //         if (data) {
 //             console.log(`promise.then():: Promise RESOLVED. Returned data: ${JSON.stringify(data)}`);
-//             // promise.then():: Promise RESOLVED. Returned data: {"httpCode":200,"data":{"name":"Ann"}}
+//             // promise.then():: Promise RESOLVED. Returned data: {"httpCode":200,"data":{"name":"Amy"}}
 //         } else if (error) {
 //             console.error(`promise.catch():: Promise REJECTED Returned error: ${JSON.stringify(error)}`);
 //             // promise.catch():: Promise REJECTED Returned error: {"httpCode":400,"data":{"error":["ERROR. Server ..."]}}

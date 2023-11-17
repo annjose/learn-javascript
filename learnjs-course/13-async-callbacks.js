@@ -18,7 +18,7 @@ const welcomeUser = (name, callback) => {
     }, 1000);
 }
 
-welcomeUser("Ann", () => {
+welcomeUser("Amy", () => {
     console.log("All done and dusted.");
 });
 

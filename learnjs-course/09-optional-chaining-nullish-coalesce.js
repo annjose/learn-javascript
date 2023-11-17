@@ -57,7 +57,7 @@ console.log('\n------Nullish coalescing-----');
 const getName = name => {
     return name ?? 'N/A';
 }
-console.log(getName('Ann'), getName(null), getName(undefined)); // Ann N/A N/A
+console.log(getName('Amy'), getName(null), getName(undefined)); // Amy N/A N/A
 
 const getWelcomeMessage = user => {
     return `Welcome ${user.fullName ?? `user`}`

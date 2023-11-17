@@ -25,20 +25,20 @@ console.log(getSlug("Bedside lavalamp"), getSlug("A B C noodles")); // "bedside-
 
 // Array into strings - neat trick
 const users = [
-    { id: 1, name: 'Ann Jose' },
-    { id: 2, name: 'Liza George' }
+    { id: 1, name: 'Jane Smith' },
+    { id: 2, name: 'John Doe' }
 ];
 
-// generate csv format - 'Ann Jose', 'Liza George'
+// generate csv format - 'Jane Smith', 'John Doe'
 // use map instead of forEach
-const csv = users.map(u => u.name).join(', '); // Ann Jose, Liza George
+const csv = users.map(u => u.name).join(', '); // Jane Smith, John Doe
 console.log(csv);
 
-// generate the HTML <ul> <li>Ann Jose</li><li>Liza George</li> </ul>
+// generate the HTML <ul> <li>Jane Smith</li><li>John Doe</li> </ul>
 const html = `<ul> ${users.map(u => `<li>${u.name}</li>`).join('')} </ul>`;
-console.log(html);   // <ul> <li>Ann Jose</li><li>Liza George</li> </ul>
+console.log(html);   // <ul> <li>Jane Smith</li><li>John Doe</li> </ul>
 
 // note: the `.join('')` is required because browser will auto-convert the array from map to a string using toString() mehtod, 
 //    which in turn will put a "," after each element. See below:
 const html_ = `<ul> ${users.map(u => `<li>${u.name}</li>`)} </ul>`;
-console.log(html_);  // <ul> <li>Ann Jose</li>,<li>Liza George</li> </ul>
+console.log(html_);  // <ul> <li>Jane Smith</li>,<li>John Doe</li> </ul>
