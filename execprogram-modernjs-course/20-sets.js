@@ -74,3 +74,88 @@ let numArr = [10, 12, 13];
 console.log(`array: ${numArr}, hasDuplicates: ${hasDuplicates(numArr)}`);   // false
 numArr = [10, 12, 10, 15, 16];
 console.log(`array: ${numArr}, hasDuplicates: ${hasDuplicates(numArr)}`);   // true
+
+// ------------------- Set Operations -----------------
+console.log("------------------- Set Operations -----------------");
+
+// Union of two arrays
+const arr1 = [1, 2, 3];
+const arr2 = [2, 3, 4];
+
+const unionArr = arr1.concat(arr2);
+console.log('union array:', unionArr);   // [1, 2, 3, 2, 3, 4]
+
+// Union of two sets
+const set1 = new Set([1, 2, 3]);
+const set2 = new Set([2, 3, 4]);
+
+const unionSet = new Set([...set1, ...set2]);
+console.log('union set:', unionSet.values());    // SetIterator {1, 2, 3, 4}
+
+// Coding challenge - Implement a general-purpose setUnion function that returns the union of two sets.
+function setUnion(set1, set2) {
+    return new Set([...set1, ...set2]);
+}
+const union = setUnion(
+    new Set([1, 2, 3]),
+    new Set([2, 3, 4])
+);
+console.log("Result of coding challenge for union set ....");
+console.log([union.has(1), union.has(2), union.has(3), union.has(4)]);  // [true, true, true, true]
+
+// Intersection of two arrays
+const intersectionArr = arr1.filter(num => arr2.includes(num));
+console.log('intersection array:', intersectionArr);    // [2, 3]
+
+// Interection of two sets
+const intersectionSet = new Set(
+    Array.from(set1).filter(num => set2.has(num))
+);
+console.log('intersection set:', intersectionSet.values());  //  SetIterator {2, 3}
+
+// Coding challenge - Implement a general-purpose setIntersection function that returns the intersection of two sets.
+function setIntersection(set1, set2) {
+    const interArr = Array.from(set1).filter(num => set2.has(num));
+    return new Set(interArr);
+}
+
+const intersection = setIntersection(
+    new Set([1, 2, 3]),
+    new Set([2, 3, 4])
+);
+
+console.log("Result of coding challenge for intersection set ....");
+console.log([intersection.has(1), intersection.has(2), intersection.has(3), intersection.has(4)]); // [false, true, true, false]
+
+// Difference of two arrays
+const differenceArr_1 = arr1.filter(num => !arr2.includes(num));
+console.log('difference array 1:', differenceArr_1);    // [1]
+const differenceArr_2 = arr2.filter(num => !arr1.includes(num));
+console.log('difference array 2:', differenceArr_2);    // [4]
+
+// Difference of two sets
+const differenceSet_1 = new Set(
+    arr1.filter(num => !arr2.includes(num))
+);
+console.log('difference set 1:', differenceSet_1.values());  // SetIterator [1]
+const differenceSet_2 = new Set(
+    arr2.filter(num => !arr1.includes(num))
+);
+console.log('difference set 2:', differenceSet_2.values());  // SetIterator [4]
+
+// Coding challenge - Implement a general-purpose setDifference function that returns the difference of two sets.
+//  Remember that "set difference" means "all items that are in the first set, but aren't in the second set."
+function setDifference(set1, set2) {
+    return new Set(
+        Array.from(set1).filter(num => !set2.has(num))
+    );
+}
+
+const difference = setDifference(
+    new Set([1, 2, 3]),
+    new Set([2, 3, 4])
+);
+console.log("Result of coding challenge for difference set ....");
+console.log(
+    [difference.has(1), difference.has(2), difference.has(3), difference.has(4)]
+); // [true, false, false, false]
