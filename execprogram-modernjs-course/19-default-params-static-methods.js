@@ -105,21 +105,3 @@ const recipes = [
     new (getRecipe('cake'))().cake(),
 ];
 console.log(recipes);
-
-//--------------------- Symbol basics ------------------------
-console.log("--------------------- Symbol basics ------------------------");
-
-const sym_1 = Symbol("sym_1");
-const sym_2 = Symbol("sym_2");
-
-console.log([sym_1.description, sym_2.description]);  // [sym_1, sym_2]
-
-console.log([sym_1 === sym_1, sym_1 === sym_2, sym_2 === sym_2]);     // [true, false, true]
-console.log(Symbol("sym3") === Symbol("sym_3"));    // false
-
-const nameSymbol = Symbol("name");
-const obj = {
-    nameSymbol: "value of string key",
-    [nameSymbol]: "value of symbol key"
-}
-console.log([obj.nameSymbol, obj[nameSymbol]]);   // ['value of string key', 'value of symbol key']
