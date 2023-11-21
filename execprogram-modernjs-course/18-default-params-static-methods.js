@@ -63,9 +63,25 @@ class Customer {
 console.log("Customer.defaultPlan:", Customer.defaultPlan); // Customer.defaultPlan: Basic
 console.log([new Customer("Advanced)").plan], new Customer().plan);  // ["Advanced", "Basic"]
 
+// Static method used as alternate constructor
+// Use a static method to simulate an alternate constructor in this rectangle class. The static method's name should be `square`. 
+// It should take one argument, `size`, and return a rectangle whose width and height are both equal to that size.
+
+class Rectangle {
+    constructor(width, height) {
+        this.width = width;
+        this.height = height;
+    }
+    static square(size) {
+        return new Rectangle(size, size);
+    }
+}
+const square = Rectangle.square(5);
+console.log("square of size 5: width and heoght:", [square.width, square.height]);
 
 
-/// Computed methods and accessors
+//------------------------- Computed methods and accessors-----------------------
+console.log("------------------------- Computed methods and accessors-----------------------");
 let methodName = "sayHello";
 class Employee {
     constructor(name) {
