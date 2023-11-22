@@ -112,3 +112,41 @@ for (const n of belowFives) {
     resultArr.push(n);
 }
 console.log("belowFives resultArr:", resultArr);  // [0, 1, 2, 3, 4]
+
+// --------------------Generators-------------------------
+console.log("--------------------Generators-------------------------");
+
+function* numbersOneToThree() {
+    yield 1;
+    yield 2;
+    yield 3;
+}
+let results = [];
+for (const n of numbersOneToThree()) {
+    results.push(n);
+}
+console.log("numbersOneToThree results:", results); // [1, 2, 3]
+
+// implement numbersBelowThree using generators
+function* numbersBelowThree() {
+    for (let i = 0; i < 3; i++) {
+        yield i;
+    }
+}
+results = Array.from(numbersBelowThree());
+console.log("numbersBelowThree using generator results:", results);[0, 1, 2]
+
+// Coding challenge
+// Write a numbersInRange(min, max) generator that iterates over all numbers from min up to, but not including, max
+function* numbersInRange(min, max) {
+    for (let i = min; i < max; i++) {
+        yield i;
+    }
+}
+results = [
+    Array.from(numbersInRange(0, 2)),
+    Array.from(numbersInRange(1, 3)),
+    // This checks that you actually wrote a generator. No cheating!
+    numbersInRange.constructor.name,
+];
+console.log("numbersInRange results:", results);    // [[0, 1], [1, 2], 'GeneratorFunction']
