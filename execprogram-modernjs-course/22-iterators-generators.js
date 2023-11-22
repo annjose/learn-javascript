@@ -150,3 +150,66 @@ results = [
     numbersInRange.constructor.name,
 ];
 console.log("numbersInRange results:", results);    // [[0, 1], [1, 2], 'GeneratorFunction']
+
+// Array destructuring with generators
+function* letters() {
+    yield 'a';
+    yield 'b';
+    yield 'c';
+}
+const [first, second, ...restOfIt] = letters();
+console.log("array destructuring: ", [first, second, restOfIt]);  // ['a' 'b' ['c']]
+
+// Infinite sequence using generators
+function* primeNumbers() {
+    let i = 2;
+
+    while (true) {
+
+        let prime = true;
+
+        for (let j = 2; j < i; j++) {
+            if (i % j === 0) {
+                prime = false;
+            }
+        }
+        if (prime) {
+            yield i;
+        }
+
+        i += 1;
+    }
+}
+
+const [p1, p2, p3, p4, p5] = primeNumbers();
+console.log([p1, p2, p3, p4, p5]);  // [2, 3, 5, 7, 11]
+
+// Find the 100th prime
+let answer;
+const primes = primeNumbers();  // this will not be an infinte loop
+for (let i = 0; i < 100; i++) {
+    answer = primes.next().value;
+}
+console.log("100th prime:", answer);   // 541
+
+// Coding challenges
+// Write an infinite powersOfTwo generator function that yields 1, 2, 4, 8, 16, etc., multiplying by 2 each time.
+function* powersOfTwo() {
+    let i = 1;
+
+    while (true) {
+        yield i;
+        i *= 2
+    }
+}
+
+const [x0, x1, x2, x3, x4] = powersOfTwo();
+console.log("powersOfTwo - first four numbers:", [x0, x1, x2, x3, x4]); // [1, 2, 4, 8, 16]
+
+// Get the 32nd power of 2.
+const powerIterator = powersOfTwo()[Symbol.iterator]();
+let x32;
+for (let i = 0; i < 32; i++) {
+    x32 = powerIterator.next().value;
+}
+console.log("32nd power of two:", x32); // 2147483648
