@@ -18,7 +18,12 @@ const u = [1, undefined, 2]
 console.log(JSON.stringify(u));             // '[1, null, 2]'
 console.log(JSON.parse(JSON.stringify(u))); // [1, null, 2]
 
-// toJSON - custom implementation
+const result = JSON.parse(JSON.stringify([undefined]));
+console.log(result);    // [null]
+
+// ------------toJSON() custom implementation ---------------
+console.log("------------toJSON() custom implementation ---------------");
+
 let user = {
     name: "Joe",
     toJSON: () => {
