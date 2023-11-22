@@ -34,3 +34,81 @@ for (const [itemName, itemCost] of costMap) {
     totalCost += itemCost;
 }
 console.log(totalCost); // 22
+
+//-------------------------Iterator methods ------------------------
+console.log("-------------------------Iterator methods ------------------------");
+const alphabets = ['a', 'b', 'c'];
+const iterator = alphabets[Symbol.iterator]();
+
+console.log(iterator.next());   // {value: 'a', done: false}
+console.log(iterator.next());   // {value: 'b', done: false}
+console.log(iterator.next());   // {value: 'c', done: false}
+
+console.log(iterator.next());   // {value: undefined, done: true}
+
+let arrIterator = [1, 2][Symbol.iterator]();
+console.log(arrIterator.next().value, arrIterator.next().value, arrIterator.next().value); // 1 2 undefined
+arrIterator = [1, 2][Symbol.iterator]();
+console.log(arrIterator.next().done, arrIterator.next().done, arrIterator.next().done);    // false false true
+
+// ----------------Custom iterator--------------
+console.log("----------------Custom iterator--------------");
+
+class BelowThreeIterator {
+    constructor(value) {
+        this.value = 0;
+    }
+
+    next() {
+        if (this.value < 3) {
+            const value = this.value;
+            this.value += 1;
+            return { value: value, done: false };
+        } else {
+            return { value: undefined, done: true }
+        }
+    }
+}
+class BelowThrees {
+    [Symbol.iterator]() {
+        return new BelowThreeIterator();
+    }
+}
+
+const belowThrees = new BelowThrees();
+let resultArr = [];
+for (const n of belowThrees) {
+    resultArr.push(n);
+}
+console.log("belowThrees resultArr:", resultArr);  // [0, 1, 2]
+
+// With this iterator, array destructuring will also work fine
+const [firstNumber, secondNumber, ...rest] = new BelowThrees();
+console.log(firstNumber, secondNumber, rest);   // 0 1 [2]
+
+// implement the same without using classes
+const belowFives = {
+    [Symbol.iterator]: () => makeIterator()
+}
+
+function makeIterator() {
+    let currentValue = 0;
+
+    return {
+        next() {
+            if (currentValue < 5) {
+                const value = currentValue;
+                currentValue += 1;
+                return { value: value, done: false };
+            } else {
+                return { value: undefined, done: true };
+            }
+        }
+    }
+}
+
+resultArr = [];
+for (const n of belowFives) {
+    resultArr.push(n);
+}
+console.log("belowFives resultArr:", resultArr);  // [0, 1, 2, 3, 4]
