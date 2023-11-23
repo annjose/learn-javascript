@@ -108,3 +108,47 @@ console.log([
     socialGraph.follows('cindy', 'betty'),
 ]);
 // [true, true, false, true, false, false]
+
+// Map iterators
+const catAges = new Map([
+    ['Ms. Fluff', 4],
+    ['Keanu', 2]
+]);
+console.log(Array.from(catAges.keys()));    // ['Ms. Fluff', 'Keanu']
+console.log(Array.from(catAges.values()));  // [4, 2]
+
+const catAges_arr = Array.from(catAges);
+console.log(catAges_arr);   // [['Ms. Fluff', 4], ['Keanu', 2]]
+
+// destructure a map directly
+const [, secondCat] = catAges;
+console.log("map destructure - secondCat:", secondCat); // ['Keanu', 2]
+
+const [, [secondName, secondAge]] = catAges;
+console.log(`map destructure deeper - ${secondName} is ${secondAge} years old`); // 'Keanu is 2 years old'
+
+// construct map from an iterable
+function* users() {
+    yield ["Joe Daniel", "joe@example.com"];
+    yield ["Amy Smith", "amy@example.com"];
+}
+const usersMap = new Map(users());
+console.log(usersMap);      // {size: 2, Joe Daniel => joe@example.com, Amy Smith => amy@example.com}
+
+const usersMapCopy = new Map(usersMap);
+console.log(Array.from(usersMapCopy));  // [ ["Joe Daniel", "joe@example.com"], ["Amy Smith", "amy@example.com"] ]
+
+// A map that is created using a sequence that runs 10K times and each time, three elements are added to the map.
+//  But the final map contains only three key-value pairs.
+function* manyDuplicates() {
+    for (let i = 0; i < 10_000; i++) {
+        // each yield returns a number and whether it is even
+        yield [1, false];
+        yield [2, true];
+        yield [3, false];
+    }
+}
+console.log("Array from manyDuplicates length:", Array.from(manyDuplicates()).length);  // 30_000
+
+const duplicatesMap = new Map(manyDuplicates());
+console.log(duplicatesMap);     // {size: 3, 1 => false, 2 => true, 3 => false}
